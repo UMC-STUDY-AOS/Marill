@@ -23,7 +23,7 @@ var num: Int? = null
 val money = 1000
 when (money) {
 	0 -> println("값이 1인가")
-  1 -> println("1이다")
+	1 -> println("1이다")
     is Int -> println("자료형이 Int인가")
     else -> println("어떤 조건도 만족하지 않아서 실행됨")
 }
