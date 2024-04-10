@@ -17,7 +17,7 @@ var num: Int? = null
 ### 조건문
 #### If, When
 - If는 자바와 똑같으니 생략
-- When: 하나의 변수를 여러 값과 비교할 때 사용 
+- When: 하나의 변수를 여러 값과 비교할 때 사용 (switch문과 비슷) 
 상위 조건에 부합하면 나머지는 실행되지 않음
 ``` kotlin
 val money = 1000
@@ -54,8 +54,16 @@ for (i in 10 downTo 0 step 2) {
 다른 언어는 0<=i<10인데 kotlin은 0<=i<=10인 걸 주의해야겠다!
 
 #### break, continue, forEach
-
-!! label 개념 추가하기 !!
+- break, continue는 JAVA와 비슷
+- label
+```kotlin
+loop@for (i in 1..10){
+	for (j in 1..10){
+		if(i==1 && j==2) break@loop
+	// label이 달린 반복문 기준으로 즉시 break
+	}
+] 
+```
 
 ### 클래스
 ``` kotlin
@@ -79,7 +87,7 @@ _내가 이 글을 쓰게 만든 결정적 이유..._
 ``` kotlin
 fun function(): Unit {
 	println("Hello World")
-} // Unit은 생략 가능 (JAVA의 void)
+} // Unit 부분이 반환형, Unit은 생략 가능 (JAVA의 void)
 
 //name이라는 파라미터가 있는 함수
 fun getName(name:String){
@@ -100,7 +108,8 @@ fun sum(vararg numbers:Int) : Int{
 }
 ```
 
-단일 표현식 함수: 중괄호를 사용하지 않고 바로 함수 결과 반환
+단일 표현식 함수: 중괄호를 사용하지 않고 바로 함수 결과 반환 반환형 생략 가능
+자료형이 결정된 변수라고 접근하면 편함 
 ``` kotlin
 //타입 지정
 fun getName():String = "개발이 취미인 사람"
