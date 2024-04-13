@@ -17,7 +17,7 @@ class AlbumFragment: Fragment() {
     ): View? {
         binding = FragmentAlbumBinding.inflate(inflater, container, false)
 
-        binding.albumBackIv.setOnclickListner{
+        binding.albumBackIv.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commitAllowingStateLoss()
         }
         return binding.root
