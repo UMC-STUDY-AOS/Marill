@@ -13,5 +13,8 @@ class SongActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySongBinding.inflate(layoutInflater) // xml code를 메모리에 객체화
         setContentView(binding.root) // xml에 있는 코드 쓰겠다
+        binding.songDownIb.setOnClickListener {
+            finish()
+        }
     }
 }
