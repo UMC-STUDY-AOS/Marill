@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -128,7 +129,7 @@
             />
 
         <TextView
-            android:id="@+id/home_today_music_title_btn_tv"
+            android:id="@+id/home_today_music_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="오늘 발매 음악"
@@ -140,45 +141,59 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_pannel_background_iv"
             />
-<!--
+
+        <ImageView
+            android:id="@+id/home_today_music_title_btn_iv"
+            android:layout_width="20dp"
+            android:layout_height="18dp"
+            android:src="@drawable/btn_main_arrow_more"
+            android:scaleType="fitStart"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="@id/home_today_music_title_tv"
+            app:layout_constraintStart_toEndOf="@id/home_today_music_title_tv"
+            app:layout_constraintTop_toTopOf="@id/home_today_music_title_tv"
+            />
+
         <TextView
-            android:id="@+id/home_pannel_today_release_tv"
+            android:id="@+id/home_pannel_today_total_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="오늘 발매 음악"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginStart="20dp"
+            android:text="종합"
+            android:textColor="#3F3FFF"
+            android:textSize="16sp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_pannel_background_iv"
+            app:layout_constraintEnd_toStartOf="@+id/home_pannel_today_release_tv"
+            app:layout_constraintTop_toBottomOf="@id/home_pannel_background_iv"
             />
 
         <TextView
             android:id="@+id/home_pannel_today_release_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="오늘 발매 음악"
+            android:text="국내"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginStart="20dp"
+            android:textSize="16sp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/home_today_music_oversea_tv"
             app:layout_constraintTop_toBottomOf="@+id/home_pannel_background_iv"
             />
 
         <TextView
-            android:id="@+id/home_pannel_today_release_tv"
+            android:id="@+id/home_today_music_oversea_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="오늘 발매 음악"
+            android:text="해외"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginStart="20dp"
+            android:textSize="16sp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_pannel_background_iv"
-            />-->
+            />
+        <!-- 종합 먼저 하게 되면 margin이 너무 커지니까 해외를 기준으로 함
+             해외는 end-end를 parent으로 맞춤으로써 마진 확보 -->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
