@@ -1,20 +1,33 @@
-package org.example
+package org.example.Algorithm
 
-fun main() {
-//    var a: Int? = null
-    var a: Int = 123
-    val stringValue = "one line string test"
-    val multiLineStringValue = """multiline
-        |string
-        |value
-    """.trimMargin() // 공백 제거 (가독성 높임)
-    println(multiLineStringValue)
+fun main(){
 
-    var b: Long = a.toLong()
-    print(b)
+    val eventPrinter = EventPrinter()
+    eventPrinter.start()
+}
 
-    var intArr = arrayOf(1,2,3,4,5)
-    var nullArr = arrayOfNulls<Int>(5) // <>: 제너릭
+interface EventListener {
+    fun onEvent(count : Int)
+}
 
-    intArr[2] = 10
+class Counter(var listener : EventListener) {
+
+    fun count(){
+        for (i in 1..100){
+            if (i%5==0){
+                listener.onEvent(i)
+            }
+        }
+    }
+}
+
+class EventPrinter {
+    fun start() {
+        val counter = Counter(object : EventListener {
+            override fun onEvent(count: Int) {
+                print("${count}-")
+            }
+        })
+        counter.count()
+    }
 }

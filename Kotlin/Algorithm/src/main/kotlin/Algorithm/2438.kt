@@ -1,4 +1,4 @@
-package org.example.baekjoon
+package org.example.Algorithm
 
 import java.util.*
 
