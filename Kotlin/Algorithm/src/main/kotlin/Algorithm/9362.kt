@@ -17,7 +17,7 @@ fun main() = with(Scanner(System.`in`)) {
 //    }
 
     val (name, age) = input.split(" ")
-    // 구조 분해 선언 개꿀
+    // 구조 분해 선언 python tuple과 비슷
 
     println("당신의 이름 : 문은비, 나이 : 12")
     println("친구의 이름 : $name, 나이 : $age")
