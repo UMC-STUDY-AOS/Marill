@@ -7,6 +7,10 @@ android {
     namespace = "com.example.myapplication2"
     compileSdk = 34
 
+    buildFeatures{
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.example.myapplication2"
         minSdk = 27
@@ -45,4 +49,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation ("androidx.recyclerview:recyclerview:1.3.1")
 }
