@@ -12,17 +12,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-        
+
         <TextView
-            android:id="@+id/memo_tv"
+            android:id="@+id/title_tv"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textSize="20dp"
             android:textColor="@color/black"
             android:background="@color/puple"
-            android:layout_marginRight="5dp"
-            />
+            android:layout_marginRight="5dp" />
+
 
         <ImageView
             android:id="@+id/delete_btn"
@@ -30,7 +30,6 @@
             android:layout_height="45dp"
             android:src="@drawable/x_icon"
             />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

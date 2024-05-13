@@ -1,6 +1,7 @@
 package com.example.myapplication2
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication2.databinding.ActivitySecondBinding
 
@@ -13,6 +14,9 @@ class SecondActivity : AppCompatActivity() {
         binding = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.showTv.text = intent.getStringExtra("data")
+        val data = intent.getStringExtra("data")
+        Log.d("SecondActivity", "Received data: $data")
+
+        binding.showTv.text = data
     }
 }

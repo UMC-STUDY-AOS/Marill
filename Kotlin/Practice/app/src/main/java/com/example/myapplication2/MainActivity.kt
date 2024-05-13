@@ -2,6 +2,7 @@ package com.example.myapplication2
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -20,10 +21,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.registerBtn.setOnClickListener {
-            var intent = Intent(this, SecondActivity::class.java)
-            intent.putExtra("data", binding.editMain.text.toString())
-            startActivity(intent)
+            try {
+                val intent = Intent(this, ItemDataActivity::class.java)
+                intent.putExtra("data", binding.editMain.text.toString())
+                startActivity(intent)
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error occurred: ${e.message}")
+                e.printStackTrace()
+            }
         }
+
 
         val create = Toast.makeText(this.applicationContext, "onCreate", Toast.LENGTH_SHORT)
         create.show()
@@ -32,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         memo = binding.editMain.text.toString()
-        binding.editMain.text.clear()
+//        binding.editMain.text.clear()
 
         val pause = Toast.makeText(this.applicationContext, "onPause", Toast.LENGTH_SHORT)
         pause.show()
@@ -40,6 +47,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
+
+        val restart = Toast.makeText(this.applicationContext, "onRestart", Toast.LENGTH_SHORT)
+        restart.show()
+
         MaterialAlertDialogBuilder(this)
             .setMessage("이어서 작성하시겠습니까?")
             .setPositiveButton("예") {dialog, which ->
@@ -47,12 +58,10 @@ class MainActivity : AppCompatActivity() {
             }
             .setNegativeButton("아니요") {dialog, which ->
                 binding.editMain.text.clear()
+                memo = ""
             }
             .create()
             .show()
-
-        val restart = Toast.makeText(this.applicationContext, "onRestart", Toast.LENGTH_SHORT)
-        restart.show()
     }
 
 }
