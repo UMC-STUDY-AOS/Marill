@@ -17,6 +17,7 @@ public class SavedSongFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLockerSavedsongBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 }

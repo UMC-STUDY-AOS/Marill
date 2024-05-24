@@ -547,11 +547,36 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
             </LinearLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/song_content_tb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabIndicatorFullWidth="false"
+                app:layout_constraintEnd_toEndOf="@id/song_music_list_layout"
+                app:layout_constraintStart_toStartOf="@id/song_music_list_layout"
+                app:layout_constraintTop_toBottomOf="@id/song_music_list_layout"
+                />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/song_content_vp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/song_content_tb"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
+
     </androidx.core.widget.NestedScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
