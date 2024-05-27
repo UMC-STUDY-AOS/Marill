@@ -22,12 +22,12 @@ class SongFragment : Fragment() {
     ): View? {
         binding = FragmentSongBinding.inflate(inflater, container, false)
 
-        val songJson = arguments?.getString("song")
-        val song = gson.fromJson(songJson, Song::class.java)
-        setInit(song)
-
-        val songAdapter = LockerVPAdapter(this)
-        binding.songContentVp.adapter = songAdapter
+//        val songJson = arguments?.getString("song")
+//        val song = gson.fromJson(songJson, Song::class.java)
+//        setInit(song)
+//
+//        val songAdapter = LockerVPAdapter(this)
+//        binding.songContentVp.adapter = songAdapter
 //        TabLayoutMediator(binding.songContentTb, binding.songContentVp){
 //            tab, position ->
 //            tab.text = infor
@@ -36,9 +36,9 @@ class SongFragment : Fragment() {
         return binding.root
     }
 
-    private fun setInit(song: Song) {
-        binding.songMore01Iv.setImageResource(song.coverImg!!)
-        binding.songListOrder01Tv.text = song.title
-        binding.songSingerName01Tv.text = song.singer
-    }
+//    private fun setInit(song: Song) {
+//        binding.songMore01Iv.setImageResource(song.coverImg!!)
+//        binding.songListOrder01Tv.text = song.title
+//        binding.songSingerName01Tv.text = song.singer
+//    }
 }

@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        inputDummySongs()
         initBottomNavigation()
 
 //        val textView = findViewById<TextView>(R.id.main_player_cl) // NullPointException Error 발생 가능
@@ -30,18 +31,51 @@ class MainActivity : AppCompatActivity() {
 
         binding.mainPlayerCl.setOnClickListener {
 //            startActivity(Intent(this, SongActivity::class.java))
+//            val intent = Intent(this, SongActivity::class.java)
+//            intent.putExtra("title", song.title)
+//            intent.putExtra("singer", song.singer)
+//            intent.putExtra("second", song.second)
+//            intent.putExtra("playTime", song.playTime)
+//            intent.putExtra("isPlaying", song.isPlaying)
+//            intent.putExtra("music", song.music)
+//            startActivity(intent)
+
+            val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
+            editor.putInt("song", song.id)
+            editor.apply()
+
             val intent = Intent(this, SongActivity::class.java)
-            intent.putExtra("title", song.title)
-            intent.putExtra("singer", song.singer)
-            intent.putExtra("second", song.second)
-            intent.putExtra("playTime", song.playTime)
-            intent.putExtra("isPlaying", song.isPlaying)
-            intent.putExtra("music", song.music)
             startActivity(intent)
         }
 
 //        Log.d("Song", song.title + song.singer)
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+//        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+//        val songJson = sharedPreferences.getString("songData", null)
+//
+//        song = if (songJson == null) {
+//            Song("라일락", "아이유(IU)", 0, 60, false, "music_lilac")
+//        } else{
+//            gson.fromJson(songJson, Song::class.java)
+//        }
+
+        val spf = getSharedPreferences("song", MODE_PRIVATE)
+        val songId = spf.getInt("songId", 0)
+
+        val songDB = SongDatabase.getInstance(this)!!
+
+        song = if (songId == 0) {
+            songDB.songDao().getSong(1)
+        } else{
+            songDB.songDao().getSong(songId)
+        }
+
+        Log.d("song ID", song.id.toString())
+        setMiniPlayer(song)
     }
 
     private fun initBottomNavigation(){
@@ -90,17 +124,94 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
-        val songJson = sharedPreferences.getString("songData", null)
+    private fun inputDummySongs() {
+        val songDB = SongDatabase.getInstance(this)!!
+        val songs = songDB.songDao().getSongs()
 
-        song = if (songJson == null) {
-            Song("라일락", "아이유(IU)", 0, 60, false, "music_lilac")
-        } else{
-            gson.fromJson(songJson, Song::class.java)
-        }
+        if (songs.isNotEmpty()) return
 
-        setMiniPlayer(song)
+        songDB.songDao().insert(
+            Song(
+                "Lilac",
+                "아이유 (IU)",
+                0,
+                200,
+                false,
+                "music_lilac",
+                R.drawable.img_album_exp2,
+                false,
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                "Flu",
+                "아이유 (IU)",
+                0,
+                200,
+                false,
+                "music_flu",
+                R.drawable.img_album_exp2,
+                false,
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                "Butter",
+                "방탄소년단 (BTS)",
+                0,
+                190,
+                false,
+                "music_butter",
+                R.drawable.img_album_exp,
+                false,
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                "Next Level",
+                "에스파 (AESPA)",
+                0,
+                210,
+                false,
+                "music_next",
+                R.drawable.img_album_exp3,
+                false,
+            )
+        )
+
+
+        songDB.songDao().insert(
+            Song(
+                "Boy with Luv",
+                "music_boy",
+                0,
+                230,
+                false,
+                "music_lilac",
+                R.drawable.img_album_exp4,
+                false,
+            )
+        )
+
+
+        songDB.songDao().insert(
+            Song(
+                "BBoom BBoom",
+                "모모랜드 (MOMOLAND)",
+                0,
+                240,
+                false,
+                "music_bboom",
+                R.drawable.img_album_exp5,
+                false,
+            )
+        )
+
+        // 데이터 확인용
+        val _songs = songDB.songDao().getSongs()
+        Log.d("DB data", _songs.toString())
     }
 }
