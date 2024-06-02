@@ -2,7 +2,6 @@ package com.example.flo
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.SimpleTimeZone
 
 @Entity(tableName = "SongTable")
 data class Song(
@@ -13,7 +12,8 @@ data class Song(
     var isPlaying: Boolean = false,
     var music: String = "",
     var coverImg: Int? = null,
-    var isLike: Boolean = false
+    var isLike: Boolean = false,
+    var albumIdx: Int = 0
 ) {
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 }
