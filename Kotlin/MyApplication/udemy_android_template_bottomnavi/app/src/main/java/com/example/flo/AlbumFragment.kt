@@ -27,8 +27,8 @@ class AlbumFragment: Fragment() {
     ): View? {
         binding = FragmentAlbumBinding.inflate(inflater, container, false)
 
-        val albumJson = arguments?.getString("album")
-        val album = gson.fromJson(albumJson, Album::class.java)
+        val albumData = arguments?.getString("album")
+        val album = gson.fromJson(albumData, Album::class.java)
         setInit(album)
 
         binding.albumBackIv.setOnClickListener {
@@ -43,6 +43,7 @@ class AlbumFragment: Fragment() {
             tab, position ->
             tab.text = information[position]
         }.attach()
+
 
         return binding.root
     }
