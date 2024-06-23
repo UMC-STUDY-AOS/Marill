@@ -12,5 +12,6 @@
         android:layout_height="match_parent"
         android:overScrollMode="never"
         android:orientation="vertical"
+        tools:listitem="@layout/item_locker_album"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
