@@ -24,6 +24,15 @@ class MainActivity : AppCompatActivity() {
         inputDummySongs()
         initBottomNavigation()
 
+        binding.mainPlayerCl.setOnClickListener {
+            val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
+            editor.putInt("songId", song.id)
+            editor.apply()
+
+            val intent = Intent(this, SongActivity::class.java)
+            startActivity(intent)
+        }
+
 //        val textView = findViewById<TextView>(R.id.main_player_cl) // NullPointException Error 발생 가능
 
 //        val song = Song(binding.mainMiniplayerTitleTv.text.toString(), binding.mainMiniplayerSingerTv.text.toString(), 0, 60, false, "music_lilac")
@@ -50,32 +59,6 @@ class MainActivity : AppCompatActivity() {
 
 //        Log.d("Song", song.title + song.singer)
 
-    }
-
-    override fun onStart() {
-        super.onStart()
-//        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
-//        val songJson = sharedPreferences.getString("songData", null)
-//
-//        song = if (songJson == null) {
-//            Song("라일락", "아이유(IU)", 0, 60, false, "music_lilac")
-//        } else{
-//            gson.fromJson(songJson, Song::class.java)
-//        }
-
-        val spf = getSharedPreferences("song", MODE_PRIVATE)
-        val songId = spf.getInt("songId", 0)
-
-        val songDB = SongDatabase.getInstance(this)!!
-
-        song = if (songId == 0) {
-            songDB.songDao().getSong(1)
-        } else{
-            songDB.songDao().getSong(songId)
-        }
-
-        Log.d("song ID", song.id.toString())
-        setMiniPlayer(song)
     }
 
     private fun initBottomNavigation(){
@@ -123,6 +106,31 @@ class MainActivity : AppCompatActivity() {
         binding.mainMiniplayerProgressSb.progress = (song.second*100000)/song.playTime
 
     }
+
+    override fun onStart() {
+        super.onStart()
+//        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+//        val songJson = sharedPreferences.getString("songData", null)
+//
+//        song = if (songJson == null) {
+//            Song("라일락", "아이유(IU)", 0, 60, false, "music_lilac")
+//        } else{
+//            gson.fromJson(songJson, Song::class.java)
+//        }
+
+        val spf = getSharedPreferences("song", MODE_PRIVATE)
+        val songId = spf.getInt("songId",0)
+        Log.d("song ID1", song.id.toString())
+        val songDB = SongDatabase.getInstance(this)!!
+
+        song = if (songId == 0){
+            songDB.songDao().getSong(1)
+        } else{
+            songDB.songDao().getSong(songId)
+        }
+
+        Log.d("song ID", song.id.toString())
+        setMiniPlayer(song)
 
     private fun inputDummySongs() {
         val songDB = SongDatabase.getInstance(this)!!

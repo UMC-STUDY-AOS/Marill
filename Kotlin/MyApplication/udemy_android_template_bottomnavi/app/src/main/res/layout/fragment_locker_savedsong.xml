@@ -12,8 +12,6 @@
         android:layout_height="match_parent"
         android:overScrollMode="never"
         android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_song"
-        />
-
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

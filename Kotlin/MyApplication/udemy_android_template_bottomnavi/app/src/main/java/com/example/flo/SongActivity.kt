@@ -21,7 +21,7 @@ class SongActivity : AppCompatActivity() {
     val songs = arrayListOf<Song>()
     lateinit var songDB: SongDatabase
     var nowPos = 0
-    
+
     override fun onCreate(savedInstanceState: Bundle?) { // activity가 실행될 때 처음으로 실행되는 함수
         super.onCreate(savedInstanceState)
         binding = ActivitySongBinding.inflate(layoutInflater) // xml code를 메모리에 객체화
@@ -30,7 +30,6 @@ class SongActivity : AppCompatActivity() {
         initPlayList()
         initSong()
         initClickListener()
-
 //        setPlayer(song)
 
 //        if (intent.hasExtra("title") && intent.hasExtra("singer")) {
@@ -62,6 +61,17 @@ class SongActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        timer.interrupt()
+        mediaPlayer?.release() // 미디어 플레이어가 갖고 있던 리소스 해제
+        mediaPlayer = null // 미디어 플레이어 해제
+    }
+
+    private fun initPlayList() {
+        songDB = SongDatabase.getInstance(this)!!
+        songs.addAll(songDB.songDao().getSongs())
+    }
 
     private fun initSong() {
 //        if (intent.hasExtra("title") && intent.hasExtra("singer")) {
@@ -77,10 +87,11 @@ class SongActivity : AppCompatActivity() {
 
         val spf = getSharedPreferences("song", MODE_PRIVATE)
         val songId = spf.getInt("songId", 0)
+        Log.d("now Song ID 0", songId.toString())
 
         nowPos = getPlayingSongPosition(songId)
-
         Log.d("now Song ID", songs[nowPos].id.toString())
+
         startTimer()
         setPlayer(songs[nowPos])
     }
@@ -96,13 +107,14 @@ class SongActivity : AppCompatActivity() {
         }
     }
 
-    private fun moveSong(direct: Int) {
-        if (nowPos + direct < 0) {
-            Toast.makeText(this, "first song", Toast.LENGTH_SHORT).show()
+    private fun moveSong(direct: Int){
+        if (nowPos + direct < 0){
+            Toast.makeText(this,"first song", Toast.LENGTH_SHORT).show()
             return
         }
-        if (nowPos + direct >= songs.size) {
-            Toast.makeText(this, "last song", Toast.LENGTH_SHORT).show()
+
+        if (nowPos + direct >= songs.size){
+            Toast.makeText(this,"last song",Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -117,13 +129,12 @@ class SongActivity : AppCompatActivity() {
         setPlayer(songs[nowPos])
     }
 
-    private fun getPlayingSongPosition(songId: Int) : Int {
+    private fun getPlayingSongPosition(songId: Int): Int {
         for (i in 0 until songs.size) {
             if (songs[i].id == songId) {
                 return i
             }
         }
-
         return 0
     }
 
@@ -149,7 +160,7 @@ class SongActivity : AppCompatActivity() {
         setPlayerStatus(song.isPlaying)
     }
 
-    fun setPlayerStatus(isPlaying: Boolean) {
+    private fun setPlayerStatus(isPlaying: Boolean) {
 
         songs[nowPos].isPlaying = isPlaying
         timer.isPlaying = isPlaying
@@ -222,32 +233,17 @@ class SongActivity : AppCompatActivity() {
 
     override fun onPause() { // 사용자가 포커스를 잃었을 때 음악 중지
         super.onPause()
-
         setPlayerStatus(false)
         songs[nowPos].second = ((binding.songProgressSb.progress * songs[nowPos].playTime) / 100) / 1000
-        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
 
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 //        editor.putString("title", songs[nowPos].title)
 //        editor.putString("title", songs[nowPos].singer)
 
 //        val songJson = gson.toJson(songs[nowPos])
-//        editor.putString("songData", songJson)
-
         editor.putInt("songId", songs[nowPos].id)
         editor.apply()
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        timer.interrupt()
-        mediaPlayer?.release() // 미디어 플레이어가 갖고 있던 리소스 해제
-        mediaPlayer = null // 미디어 플레이어 해제
-    }
-
-    private fun initPlayList() {
-        songDB = SongDatabase.getInstance(this)!!
-        songs.addAll(songDB.songDao().getSongs())
     }
 }

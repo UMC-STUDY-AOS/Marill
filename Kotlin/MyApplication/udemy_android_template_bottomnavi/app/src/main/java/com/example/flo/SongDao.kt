@@ -1,10 +1,6 @@
 package com.example.flo
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface SongDao {
@@ -17,15 +13,15 @@ interface SongDao {
     @Delete
     fun delete(song: Song)
 
-    @Query("select * from SongTable")
+    @Query("SELECT * FROM SongTable")
     fun getSongs(): List<Song>
 
-    @Query("select * from SongTable where id= :id")
+    @Query("SELECT * FROM SongTable WHERE id = :id")
     fun getSong(id: Int): Song
 
-    @Query("update songtable set isLike= :isLike where id = :id")
-    fun updateIsLikeById(isLike: Boolean, id: Int)
+    @Query("UPDATE SongTable SET isLike= :isLike WHERE id = :id")
+    fun updateIsLikeById(isLike: Boolean,id: Int)
 
-    @Query("select * from songtable where isLike= :isLike")
+    @Query("SELECT * FROM SongTable WHERE isLike= :isLike")
     fun getLikedSongs(isLike: Boolean): List<Song>
 }

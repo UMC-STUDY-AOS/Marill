@@ -31,7 +31,8 @@ public class SavedSongFragment : Fragment(){
     }
 
     private fun initRecyclerView() {
-        binding.lockerSavedSongRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.lockerSavedSongRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         val songRVAdapter = SavedSongRVAdapter()
         songRVAdapter.setMyItemClickListener(object : SavedSongRVAdapter.MyItemClickListener {
