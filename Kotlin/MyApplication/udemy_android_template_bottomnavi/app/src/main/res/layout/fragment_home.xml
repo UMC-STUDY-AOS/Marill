@@ -372,7 +372,8 @@
             android:layout_marginTop="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/home_today_music_album_rv"/>
+            app:layout_constraintTop_toBottomOf="@id/home_today_music_album_rv"
+            />
 
         <TextView
             android:id="@+id/home_daily_music_title_tv"

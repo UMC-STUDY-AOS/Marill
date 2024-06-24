@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
             editor.apply()
 
             val intent = Intent(this, SongActivity::class.java)
-
             startActivity(intent)
         }
 
@@ -133,7 +132,6 @@ class MainActivity : AppCompatActivity() {
 
         Log.d("song ID", song.id.toString())
         setMiniPlayer(song)
-    }
 
     private fun inputDummySongs() {
         val songDB = SongDatabase.getInstance(this)!!
@@ -221,6 +219,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
+        // 데이터 확인용
         val _songs = songDB.songDao().getSongs()
         Log.d("DB data", _songs.toString())
     }
