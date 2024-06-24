@@ -14,6 +14,7 @@ class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
     private var albumDatas = ArrayList<Album>()
+    lateinit var songDB: SongDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,14 +29,17 @@ class HomeFragment : Fragment() {
 //                .commitAllowingStateLoss()
 //        }
 
-        albumDatas.apply {
-            add(Album("Butter", "방탄소년단(BTS)", R.drawable.img_album_exp))
-            add(Album("Lilac", "아이유(IU)", R.drawable.img_album_exp2))
-            add(Album("Next Lebel", "에스타(AESPA)", R.drawable.img_album_exp3))
-            add(Album("Boy With Luv", "방탄소년단(BTS)", R.drawable.img_album_exp4))
-            add(Album("BBom BBom", "모모랜드(MOMOLAND)", R.drawable.img_album_exp5))
-            add(Album("Weekend", "태연", R.drawable.img_album_exp6))
-        }
+//        albumDatas.apply {
+//            add(Album("Butter", "방탄소년단(BTS)", R.drawable.img_album_exp))
+//            add(Album("Lilac", "아이유(IU)", R.drawable.img_album_exp2))
+//            add(Album("Next Lebel", "에스타(AESPA)", R.drawable.img_album_exp3))
+//            add(Album("Boy With Luv", "방탄소년단(BTS)", R.drawable.img_album_exp4))
+//            add(Album("BBom BBom", "모모랜드(MOMOLAND)", R.drawable.img_album_exp5))
+//            add(Album("Weekend", "태연", R.drawable.img_album_exp6))
+//        }
+
+        songDB = SongDatabase.getInstance(requireContext())!!
+        albumDatas.addAll(songDB.albumDao().getAlbums())
 
         val albumRVAdapter = AlbumRVAdapter(albumDatas)
         binding.homeTodayMusicAlbumRv.adapter = albumRVAdapter

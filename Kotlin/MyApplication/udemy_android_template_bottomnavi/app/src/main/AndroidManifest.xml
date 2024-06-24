@@ -18,10 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SongActivity"
-            android:exported="true"
-            />
+        <activity android:name="com.example.flo.SongActivity"/>
+        <activity android:name="com.example.flo.LoginActivity"/>
+        <activity android:name="com.example.flo.SignUpActivity"/>
     </application>
 
 </manifest>
